@@ -8,7 +8,8 @@ class User(models.Model):
     member_since = models.DateTimeField('Member Since:')
     
 class Stock(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ManyToManyField(User)
+    ticker = models.CharField()
     average_daily_volume = models.BigIntegerField()
     book_value = models.DecimalField(max_digits=12, decimal_places=2)
     change = models.DecimalField(max_digits=12, decimal_places=2)
