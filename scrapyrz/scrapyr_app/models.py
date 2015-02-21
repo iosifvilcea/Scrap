@@ -32,4 +32,8 @@ class Stock(models.Model):
     volume = BigIntegerField(default = 0)
     
 class Article(models.Model):
-    
+    title = models.CharField(max_length = 80)
+    author = models.CharField(max_length = 40)
+    pub_date = models.DateTimeField()
+    content = models.TextField()
+    stock = models.ManyToManyField(Stock) 
