@@ -31,4 +31,5 @@ class Stock(models.Model):
     two_hundred_day_moving_avg =  = models.DecimalField(max_digits=12, decimal_places=2)
     volume = BigIntegerField(default = 0)
     
+class Article(models.Model):
     
