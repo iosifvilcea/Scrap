@@ -1,0 +1,4 @@
+{% extends "scrapyr_app/base.html" %}
+{% block content %}
+<h1>Base Works</h1>
+{% endblock %}
