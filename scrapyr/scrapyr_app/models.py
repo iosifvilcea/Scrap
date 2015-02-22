@@ -38,11 +38,11 @@ class Article(models.Model):
     stocks = models.ManyToManyField(Stock)
 '''
 
-class Profile(models.Model):
+class Account(models.Model):
     user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='profile')
     stocks = models.ManyToManyField(Stock, through='Portfolio')
 
 class Portfolio(models.Model):
     stock = models.ForeignKey(Stock)                                                                                                          
-    profile = models.ForeignKey(Profile)
+    profile = models.ForeignKey(Account)
 # Create your models here.

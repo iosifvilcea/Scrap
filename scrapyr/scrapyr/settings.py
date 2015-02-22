@@ -38,6 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'userena',
+    'guardian',
+    'easy_thumbnails',
     'scrapyr_app',
 )
 
@@ -105,7 +108,7 @@ DATABASES = {
 
 ANONYMOUS_USER_ID = -1
 
-AUTH_PROFILE_MODULE = 'scrapyr_app.Profile'
+AUTH_PROFILE_MODULE = 'scrapyr_app.Account'
 
 LANGUAGE_CODE = 'en-us'
 
