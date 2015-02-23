@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, url
-
 from scrapyr_app import views
 
 urlpatterns = patterns('',

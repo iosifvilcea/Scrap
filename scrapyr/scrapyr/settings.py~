@@ -29,62 +29,128 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+#SOCIAL AUTH SETTINGS
+#Facebook
+#FACEBOOK_APP_ID              = '1045918372104223'
+#FACEBOOK_API_SECRET          = 'db7d1d88702e737b00df266ab5c61ee8'
+#Github
+#GITHUB_API_KEY = 'c4e48fb17ea9405238ec'
+#GITHUB_API_SECRET = 'a93e01b2ddf098ed8fd3e92b69c6c78cad1f7fc4'
+#Google
+#GOOGLE_OAUTH2_CLIENT_ID = '95819183673-k7b507lq7u316v1jea2sneoenofe124s.apps.googleusercontent.com'
+#GOOGLE_OAUTH2_CLIENT_SECRET = 'kbxKDgyY5oQPLxhseOD9m0o8'
+#LinkedIn
+#LINKEDIN_CONSUMER_KEY        = 'f362440a-66c1-4d62-a904-6737463da62b'
+#LINKEDIN_CONSUMER_SECRET     = '3d41a50a-4253-45d2-843d-27a18e0e3141'
+#Microsoft//Live
+#LIVE_CLIENT_ID               = ''
+#LIVE_CLIENT_SECRET           = ''
+#Twitter
+SOCIAL_AUTH_TWITTER_KEY = 'q1OV4TLI7MPjPA6vZnPndSpp1'
+SOCIAL_AUTH_TWITTER_SECRET = 'LyOiyDSW2o9WVWXKHmKbKDzw4UBo94sqrUkXFfGCYZAct2d5Fd'
+#Yahoo
+#YAHOO_CONSUMER_KEY           = ''
+#YAHOO_CONSUMER_SECRET        = ''
 
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home/'
+SOCIAL_AUTH_LOGIN_URL = '/'
+
+
+
+##############################################################################
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-)
+      'django.contrib.admin',
+      'django.contrib.auth',
+      'django.contrib.contenttypes',
+      'django.contrib.sessions',
+      'django.contrib.messages',
+      'django.contrib.staticfiles',
+      'social.apps.django_app.default',
+      'scrapyr_app',
+
+
+  )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+      'django.contrib.auth.context_processors.auth',
+      'django.core.context_processors.debug',
+      'django.core.context_processors.i18n',
+      'django.core.context_processors.media',
+      'django.core.context_processors.static',
+      'django.core.context_processors.tz',
+      'django.contrib.messages.context_processors.messages',
+      'social.apps.django_app.context_processors.backends',
+      'social.apps.django_app.context_processors.login_redirect',
+  )
+
+AUTHENTICATION_BACKENDS = (
+      'social.backends.facebook.FacebookOAuth2',
+      'social.backends.google.GoogleOAuth2',
+      'social.backends.yahoo.YahooOpenId',
+      'social.backends.twitter.TwitterOAuth',
+      'django.contrib.auth.backends.ModelBackend',
+  )
+##############################################################################
+
+
+#SITE_ID = 2
+
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = 'scrapyrapp@gmail.com'
+#EMAIL_HOST_PASSWORD = 'momoneymoproblems'
+
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-)
+      'django.contrib.sessions.middleware.SessionMiddleware',
+      'django.middleware.common.CommonMiddleware',
+      'django.middleware.csrf.CsrfViewMiddleware',
+      'django.contrib.auth.middleware.AuthenticationMiddleware',
+      'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+      'django.contrib.messages.middleware.MessageMiddleware',
+      'django.middleware.clickjacking.XFrameOptionsMiddleware',
+      'django.middleware.security.SecurityMiddleware',
+  )
 
 ROOT_URLCONF = 'scrapyr.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+      {
+                'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                'DIRS': [],
+                'APP_DIRS': True,
+                'OPTIONS': {
+                              'context_processors': [
+                                                'django.template.context_processors.debug',
+                                                'django.template.context_processors.request',
+                                                'django.contrib.auth.context_processors.auth',
+                                                'django.contrib.messages.context_processors.messages',
+                                            ],
+                          },
+            },
+  ]
+
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 WSGI_APPLICATION = 'scrapyr.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+      'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            }
+  }
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
+
+#ANONYMOUS_USER_ID = -1
+
+SOCIAL_AUTH_USER_MODEL = 'scrapyr_app.User'
 
 LANGUAGE_CODE = 'en-us'
 
@@ -97,7 +163,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/dev/howto/static-files/
+
 
 STATIC_URL = '/static/'

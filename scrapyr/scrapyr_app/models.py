@@ -1,10 +1,4 @@
 from django.db import models
-from django.db import models
-from awesome_avatar.fields import AvatarField
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext as _
-from userena.models import UserenaLanguageBaseProfile
-
 
 class Stock(models.Model):
       ticker = models.CharField(max_length=5)
@@ -37,9 +31,25 @@ class Article(models.Model):
     content = models.TextField()
     stocks = models.ManyToManyField(Stock)
 '''
+class UserManager(models.Manager):
+    def create_user(self, username, email):
+        return self.model._default_manager.create(username=username)
+                
+                
+class CustomUser(models.Model):
+     username = models.CharField(max_length=128) 
+     last_login = models.DateTimeField(blank=True, null=True)
+     
+     objects = UserManager()
+     
+     def is_authenticated(self):
+         return True
+    
+
+
 
 class Account(models.Model):
-    user = models.OneToOneField(User, unique=True, verbose_name=_('user'), related_name='profile')
+    user = models.OneToOneField(CustomUser, unique=True)
     stocks = models.ManyToManyField(Stock, through='Portfolio')
 
 class Portfolio(models.Model):

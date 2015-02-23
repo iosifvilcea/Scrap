@@ -13,5 +13,4 @@ class AccountAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Stock, StockAdmin)
-admin.site.unregister(Account)
 admin.site.register(Account, AccountAdmin)
