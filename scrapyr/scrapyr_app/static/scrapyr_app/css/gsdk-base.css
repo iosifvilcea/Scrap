@@ -678,7 +678,7 @@ input{
         display: inline-block;
         position: absolute;
         left: 100%;
-        margin-left: -60%;
+        margin-left: 0%;
         top: -11px;
     }
     .dropdown-menu:after {
@@ -689,7 +689,7 @@ input{
         display: inline-block;
         position: absolute;
         left: 100%;
-        margin-left: -60%;
+        margin-left: 0%;
         top: -10px;
     }
 }

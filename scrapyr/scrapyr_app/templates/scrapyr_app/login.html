@@ -5,6 +5,14 @@
 <br>
 <a href="/logout">Logout</a>
 {% else %}
-<a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+<row>
+  <div class="col-md-3 social-buttons-demo">  
+<a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}"><button class="btn btn-social btn-fill btn-twitter">
+    <i class="fa fa-twitter"></i> Connect with Twitter
+  </button><br></a></div>
+  <div class="col-md-3 social-buttons-demo"><a href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.get_full_path|urlencode }}"><button class="btn btn-social btn-fill btn-linkedin">
+  <i class="fa fa-linkedin-square"></i> Connect with Linkedin
+  </button></a></div>
+</row>
 {% endif %}
 {% endblock %}
