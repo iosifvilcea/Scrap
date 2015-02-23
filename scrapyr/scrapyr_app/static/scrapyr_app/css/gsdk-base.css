@@ -334,6 +334,15 @@ input.ct-red + span.switch-left, input.ct-red + span + label + span.switch-right
     padding: 15px 60px;
 }
 
+input{
+    background-color: #FFF;
+    border: 1px solid #E3E3E3;
+    border-radius: 4px;
+    box-shadow: none;
+    color: #444;
+    height: 38px;
+    padding: 6px 16px;
+}
 
 /*             Inputs               */
 .form-control {
@@ -713,6 +722,14 @@ input.ct-red + span.switch-left, input.ct-red + span + label + span.switch-right
         margin: 0 auto;
     }
     
+}
+
+legend{
+    color:#fff;
+}
+
+label{
+    color:#fff;
 }
 
 /*           Labels & Progress-bar              */

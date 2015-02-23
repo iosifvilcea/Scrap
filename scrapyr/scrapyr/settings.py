@@ -121,9 +121,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-USERENA_SIGNIN_REDIRECT_URL = 'scrapyr_app/%(username)s/'
-LOGIN_URL = '/scrapyr_app/signin/'
-LOGOUT_URL = '/scrapyr_app/signout/'
+USERENA_SIGNIN_REDIRECT_URL = 'account/%(username)s/'
+LOGIN_URL = 'account/signin/'
+LOGOUT_URL = 'account/signout/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
