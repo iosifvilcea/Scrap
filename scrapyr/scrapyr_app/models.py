@@ -1,6 +1,8 @@
 from django.db import models
 
 class Stock(models.Model):
+      def __unicode__(self):
+               return 'TAG: ' + self.ticker
       ticker = models.CharField(max_length=5)
       average_daily_volume = models.BigIntegerField()
       book_value = models.DecimalField(max_digits=15, decimal_places=2, default=0)
@@ -33,24 +35,47 @@ class Article(models.Model):
 '''
 class UserManager(models.Manager):
     def create_user(self, username, email):
-        return self.model._default_manager.create(username=username)
+        return self.model._default_manager.create(username=username, email=email)
+    def all(self, session=None):
+        return self.all()
                 
                 
 class CustomUser(models.Model):
+     def __unicode__(self):
+              return  self.username
      username = models.CharField(max_length=128) 
      last_login = models.DateTimeField(blank=True, null=True)
-     
+     email = models.EmailField(default='myemail@fake.com')
      objects = UserManager()
+     
+     def is_active(self):
+         return True
+         
+     def is_staff(self):
+         return False
      
      def is_authenticated(self):
          return True
-    
+         
+     def has_module_perms(self, app_label):
+         return True
+         
+     def has_perm(self, app_label):
+         return True
 
+class AccountManager(models.Manager):
+    def create_account(self, user):
+        return self.model._default_manager.create(user=user)
+    def all(self, session=None):
+        return self.all()
 
 
 class Account(models.Model):
+    def __unicode__(self):
+             return 'Account: ' + self.user.username
     user = models.OneToOneField(CustomUser, unique=True)
     stocks = models.ManyToManyField(Stock, through='Portfolio')
+    objects = AccountManager()
 
 class Portfolio(models.Model):
     stock = models.ForeignKey(Stock)                                                                                                          
