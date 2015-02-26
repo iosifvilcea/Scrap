@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^login/$', 'scrapyr_app.views.login'),
     url(r'^home/$', 'scrapyr_app.views.home'),
     url(r'^logout/$', 'scrapyr_app.views.logout'),
+    url(r'^profile/$', 'scrapyr_app.views.profile'),
 ]

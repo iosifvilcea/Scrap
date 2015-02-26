@@ -1,0 +1,17 @@
+{% extends "scrapyr_app/base.html" %}
+{% block content %}
+{% if user and not user.is_anonymous %}
+<h1>Hello, {{ user.username }}!</h1>
+<blockquote>
+Welcome to the profile page!
+</blockquote>
+
+<h1 style="color:#fff">{{ user  }}:{{ email }} {{ message }}</h1>
+<h2>{{ type }}</h2><br>
+
+<br>
+<a href="/logout">Logout</a>
+{% else %}
+<h1>Nothing here!</h1>
+{% endif %}
+{% endblock %}
