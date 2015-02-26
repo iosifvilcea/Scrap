@@ -1,15 +1,8 @@
 {% extends "scrapyr_app/content_base.html" %}
 {% block content %}
 {% if user and not user.is_anonymous %}
-<h1>Hello, {{ user.username }}!</h1>
-<blockquote>
-Welcome to the profile page!
-</blockquote>
-<div class="form-group">
-
-  <input class="form-control" type="text" placeholder="Inactive" value="Test Value"></input>
-
-</div>
+<h1 style="text-align:center;">Hello, {{ user.username }}!</h1>
+<h1 style="text-align:center;"><small class="subtitle">Welcome to your profile page!</small></h1>
 <div class="subscribe-line">
   <div id="subscription" class="container">
     <div class="container">
@@ -17,14 +10,27 @@ Welcome to the profile page!
 	<div class="col-md-9">
 	  <form class="">
 	    <div class="form-group">
-	      <input style="border-color:transparent;" value="" class="form-control" placeholder="Enter your email..." type="text">
+	      <input style="border-color:transparent;" value="" class="form-control" placeholder="First Name" type="text">
 	    </div>
 	  </form>
 	</div>
 	<div class="col-md-3">
-	  <button type="button" class="btn btn-danger btn-round btn-fill btn-block btn-lg">Subscribe Now!</button>
+	  <h1><small class="subtitle">What your friends call you</small></h1>
 	</div>
       </div>
+      <div class="row">
+	<div class="col-md-9">
+	  <form class="">
+	    <div class="form-group">
+	      <input style="border-color:transparent;" value="" class="form-control" placeholder="Last Name" type="text">
+	    </div>
+	  </form>
+	</div>
+	<div class="col-md-3">
+	  <h1><small class="subtitle">The one you share with your family</small></h1>
+	</div>
+      </div>
+      
     </div>
   </div>
 </div>

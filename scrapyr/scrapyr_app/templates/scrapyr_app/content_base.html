@@ -15,14 +15,14 @@
     <link href="{% static 'scrapyr_app/css/demo.css' %}" rel="stylesheet" />
     <!--     Font Awesome     -->
     <link href="{% static 'scrapyr_app/css/font-awesome.css' %}" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Grand+Hotel" rel="stylesheet" type="text/css">
     
   </head>
   <body>
     <div id="navbar-full">
       <div id="navbar">
-	<div class="navigation-example">
-	  <nav class="navbar navbar-default navbar-transparent" role="navigation-demo">
+	<div class="navigation-profile">
+	  <nav class="navbar navbar-default navbar-fixed-top" role="navigation-demo">
 	    <div class="container">
 	      <!-- Brand and toggle get grouped for better mobile display -->
 	      <div class="navbar-header">
@@ -67,16 +67,16 @@
 		</ul>
 
 	      </div><!-- /.navbar-collapse -->
+	      
 	    </div><!-- /.container-fluid -->
 	  </nav>
-	  <div class="img-src"><img href="{% static 'scrapyr_app/img/bg.jpg' %}" /></div>
+	  <!-- <div class="img-src"><img href="{% static 'scrapyr_app/img/bg.jpg' %}" /></div> -->
 	</div>
       </div><!--  end navbar -->
       
       
     </div> <!-- end menu-dropdown -->
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------->
     
 

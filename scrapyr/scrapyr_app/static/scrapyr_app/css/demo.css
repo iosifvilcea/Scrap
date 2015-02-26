@@ -67,6 +67,14 @@
     background-size: cover;
     position: relative;
 }
+.navigation-profile{
+    height: 200px;
+    background-image: url('../img/bg.jpg');
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+}
+
 #notifications{
     background-color: #FFFFFF;
     display: block;
