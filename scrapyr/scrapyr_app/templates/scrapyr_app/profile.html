@@ -1,11 +1,33 @@
-{% extends "scrapyr_app/base.html" %}
+{% extends "scrapyr_app/content_base.html" %}
 {% block content %}
 {% if user and not user.is_anonymous %}
 <h1>Hello, {{ user.username }}!</h1>
 <blockquote>
 Welcome to the profile page!
 </blockquote>
+<div class="form-group">
 
+  <input class="form-control" type="text" placeholder="Inactive" value="Test Value"></input>
+
+</div>
+<div class="subscribe-line">
+  <div id="subscription" class="container">
+    <div class="container">
+      <div class="row">
+	<div class="col-md-9">
+	  <form class="">
+	    <div class="form-group">
+	      <input value="" class="form-control" placeholder="Enter your email..." type="text">
+	    </div>
+	  </form>
+	</div>
+	<div class="col-md-3">
+	  <button type="button" class="btn btn-danger btn-round btn-fill btn-block btn-lg">Subscribe Now!</button>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
 <h1 style="color:#fff">{{ user  }}:{{ email }} {{ message }}</h1>
 <h2>{{ type }}</h2><br>
 

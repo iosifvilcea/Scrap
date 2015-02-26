@@ -19,6 +19,7 @@ def index(request):
 def login(request):
     if request.user.__class__.__name__ is 'AnonymousUser':
         message = "You are anonymous"
+        context = RequestContext(request, {'request': request, 'user': request.user, 'type': request.user.__class__.__name__, 'message': message})
     elif request.user.__class__.__name__ is 'CustomUser':
         loggedInUser = request.user
         return redirect('scrapyr_app.views.profile')
