@@ -4,7 +4,13 @@ class Stock(models.Model):
       def __unicode__(self):
                return 'TAG: ' + self.ticker
       ticker = models.CharField(max_length=5)
+      name = models.CharField(max_length=30)
+      last_sale = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       average_daily_volume = models.BigIntegerField()
+      ipo_year = models.CharField(max_length=4)
+      sector = models.CharField(max_length = 30)
+      industry = models.CharField(max_length = 30)
+      summary_quote = models.URLField()
       book_value = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       change = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       dividend_per_share = models.DecimalField(max_digits=15, decimal_places=2, default=0)
@@ -25,14 +31,14 @@ class Stock(models.Model):
       two_hundred_day_moving_avg = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       volume = models.BigIntegerField(default=0)
 
-'''
+
 class Article(models.Model):
     title = models.CharField(max_length=80)
     author = models.CharField(max_length=40)
     pub_date = models.DateTimeField()
     content = models.TextField()
     stocks = models.ManyToManyField(Stock)
-'''
+
 class UserManager(models.Manager):
     def create_user(self, username, email):
         return self.model._default_manager.create(username=username, email=email)
@@ -76,8 +82,10 @@ class Account(models.Model):
     user = models.OneToOneField(CustomUser, unique=True)
     stocks = models.ManyToManyField(Stock, through='Portfolio')
     objects = AccountManager()
+    articles = models.ManyToManyField(Article, through='Portfolio')
 
 class Portfolio(models.Model):
     stock = models.ForeignKey(Stock)                                                                                                          
     profile = models.ForeignKey(Account)
+    article = models.ForeignKey(Article)
 # Create your models here.

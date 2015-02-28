@@ -8,6 +8,9 @@ class PortfolioInline(admin.TabularInline):
 class StockAdmin(admin.ModelAdmin):
       inlines = (PortfolioInline,)
       
+class ArticleAdmin(admin.ModelAdmin):
+        inlines = (PortfolioInline,)
+
 class AccountAdmin(admin.ModelAdmin):
       inlines = (PortfolioInline,)
 

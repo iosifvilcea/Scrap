@@ -17,6 +17,16 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Article',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=80)),
+                ('author', models.CharField(max_length=40)),
+                ('pub_date', models.DateTimeField()),
+                ('content', models.TextField()),
+            ],
+        ),
+        migrations.CreateModel(
             name='CustomUser',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -29,6 +39,7 @@ class Migration(migrations.Migration):
             name='Portfolio',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('article', models.ForeignKey(to='scrapyr_app.Article')),
                 ('profile', models.ForeignKey(to='scrapyr_app.Account')),
             ],
         ),
@@ -37,7 +48,13 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('ticker', models.CharField(max_length=5)),
+                ('name', models.CharField(max_length=30)),
+                ('last_sale', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('average_daily_volume', models.BigIntegerField()),
+                ('ipo_year', models.CharField(max_length=4)),
+                ('sector', models.CharField(max_length=30)),
+                ('industry', models.CharField(max_length=30)),
+                ('summary_quote', models.URLField()),
                 ('book_value', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('change', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('dividend_per_share', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
@@ -63,6 +80,16 @@ class Migration(migrations.Migration):
             model_name='portfolio',
             name='stock',
             field=models.ForeignKey(to='scrapyr_app.Stock'),
+        ),
+        migrations.AddField(
+            model_name='article',
+            name='stocks',
+            field=models.ManyToManyField(to='scrapyr_app.Stock'),
+        ),
+        migrations.AddField(
+            model_name='account',
+            name='articles',
+            field=models.ManyToManyField(to='scrapyr_app.Article', through='scrapyr_app.Portfolio'),
         ),
         migrations.AddField(
             model_name='account',
