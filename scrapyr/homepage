@@ -1,0 +1,11 @@
+diff --git a/scrapyr/scrapyr_app/templates/scrapyr_app/home.html b/scrapyr/scrapyr_app/templates/scrapyr_app/home.html
+index e337ce0..7fccd04 100644
+--- a/scrapyr/scrapyr_app/templates/scrapyr_app/home.html
++++ b/scrapyr/scrapyr_app/templates/scrapyr_app/home.html
+@@ -1,5 +1,5 @@
+ {% extends "scrapyr_app/base.html" %}
+ {% block content %}
+-<h1>Welcome</h1>
++<h1>Hello</h1>
+ <p><a href="/logout">Logout</a></p>
+ {% endblock %}
