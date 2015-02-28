@@ -44,7 +44,7 @@ def login(request):
     else:
         message = 'already have an email!'
         login_context = RequestContext(request, {'request': request, 'user': request.user, 'type': request.user.__class__.__name__, 'message': message})
-    return render_to_response('scrapyr_app/login.html', login_context=context)
+    return render_to_response('scrapyr_app/login.html', context=context)
     #return render(request, 'scrapyr_app/login.html')
       
 
