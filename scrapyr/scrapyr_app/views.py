@@ -6,16 +6,34 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from scrapyr_app.models import Account, CustomUser, Stock 
 from django.shortcuts import redirect
+#from scrapyr_app.static import stocks
+
+def stocks(request):
+    return render(request, 'scrapyr_app/stocks.html')
 
 
-# from django.template.context import RequestContext
-def profile(request):
-    return render(request, 'scrapyr_app/profile.html')
+# View for Single stock login not required 
+# If no stock is requested sent them to our 
+# awesome list of stocks
 
+
+
+def stock(request):
+    if request.method == 'POST':
+        companyName=request.POST['ticker']
+        return redirect('/stock/'+companyName)
+    else:
+      return redirect('scrapyr_app.views.stocks')
+      
+      
 def index(request):
     #return HttpResponse("Hello, world. You're at the scrapyr index.")
     return render(request, 'scrapyr_app/index.html')
 
+
+# login page redirects to profile if logged in
+# need to change case for anonymous user to redirect 
+# to homepage 
 def login(request):
     if request.user.__class__.__name__ is 'AnonymousUser':
         message = "You are anonymous"
@@ -25,21 +43,26 @@ def login(request):
         return redirect('scrapyr_app.views.profile')
     else:
         message = 'already have an email!'
-        context = RequestContext(request, {'request': request, 'user': request.user, 'type': request.user.__class__.__name__, 'message': message})
-    return render_to_response('scrapyr_app/login.html', context_instance=context)
+        login_context = RequestContext(request, {'request': request, 'user': request.user, 'type': request.user.__class__.__name__, 'message': message})
+    return render_to_response('scrapyr_app/login.html', login_context=context)
     #return render(request, 'scrapyr_app/login.html')
       
-      
+
+
+
+
+
+# dashboard is currently not a functioning view
 @login_required(login_url='/')
-def home(request):
-    user_objects = Account.objects.all()
-    if user_objects.count() == 0:
-        user_objects = "WOW"
-    #account = Account.objects.get(user.username = request.user.username)
+def dashboard(request):
     context = RequestContext(request, {'user_objects': user_objects})
     return render_to_response('scrapyr_app/home.html', context)
-            
-            
+    
+# Profile Page for user considering making an edit 
+# profile/settings page eventually
+def profile(request):
+    return render(request, 'scrapyr_app/profile.html')
+      
 def logout(request):
     auth_logout(request)
     return redirect('/')
