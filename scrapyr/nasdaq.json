@@ -1,16 +1,13 @@
-[
-  {
+[{
     "model": "scrapyr_app.stock",
     "pk":"1",
     "fields": {
-    "Symbol":"TFSC",
-    "Name":"1347 Capital Corp.",
-    "LastSale":"9.43",
-    "MarketCap":"$56.09M",
-    "IPOyear":"2014",
-    "Sector":"Finance",
-    "industry":"Business Services",
-    "Summary Quote":"http://www.nasdaq.com/symbol/tfsc"
-    }
-  }
-]
+    "ticker":"RPRX",
+    "name":"Repros Therapeutics Inc.",
+    "last_sale":"9.17",
+    "market_cap":"$222.61M",
+    "ipo_year":"n/a",
+    "sector":"Health Care",
+    "industry":"Biotechnology: Biological Products (No Diagnostic Substances)",
+    "summary_quote":"http://www.nasdaq.com/symbol/rprx"
+  }}]
