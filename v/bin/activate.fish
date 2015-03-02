@@ -32,7 +32,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/jamescarl/Documents/Python/CIS4930/scrapyrz/v"
+set -gx VIRTUAL_ENV "/root/scrapyrz/v"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

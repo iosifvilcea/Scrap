@@ -1,4 +1,4 @@
-#!/Users/jamescarl/Documents/Python/CIS4930/scrapyrz/v/bin/python
+#!/root/scrapyrz/v/bin/python
 """PILdriver, an image-processing calculator using PIL.
 
 An instance of class PILDriver is essentially a software stack machine

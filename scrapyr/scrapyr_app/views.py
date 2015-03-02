@@ -9,7 +9,9 @@ from django.shortcuts import redirect
 #from scrapyr_app.static import stocks
 
 def stocks(request):
-    return render(request, 'scrapyr_app/stocks.html')
+    stocks = Stock.objects.all()
+    context = RequestContext(request, {'request': request, 'stocks':stocks})
+    return render_to_response('scrapyr_app/stocks.html', context=context)
 
 
 # View for Single stock login not required 

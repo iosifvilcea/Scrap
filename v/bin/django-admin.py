@@ -1,4 +1,4 @@
-#!/Users/jamescarl/Documents/Python/CIS4930/scrapyrz/v/bin/python
+#!/root/scrapyrz/v/bin/python
 from django.core import management
 
 if __name__ == "__main__":

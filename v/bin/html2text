@@ -1,4 +1,4 @@
-#!/Users/jamescarl/Documents/Python/CIS4930/scrapyrz/v/bin/python
+#!/root/scrapyrz/v/bin/python
 # EASY-INSTALL-ENTRY-SCRIPT: 'html2text==2015.2.18','console_scripts','html2text'
 __requires__ = 'html2text==2015.2.18'
 import sys
