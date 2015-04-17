@@ -31,15 +31,24 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('username', models.CharField(max_length=128)),
+                ('first_name', models.CharField(max_length=18)),
+                ('last_name', models.CharField(max_length=22)),
                 ('last_login', models.DateTimeField(null=True, blank=True)),
                 ('email', models.EmailField(default=b'myemail@fake.com', max_length=254)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Library',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('article', models.ForeignKey(to='scrapyr_app.Article')),
+                ('profile', models.ForeignKey(to='scrapyr_app.Account')),
             ],
         ),
         migrations.CreateModel(
             name='Portfolio',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('article', models.ForeignKey(to='scrapyr_app.Article')),
                 ('profile', models.ForeignKey(to='scrapyr_app.Account')),
             ],
         ),
@@ -50,11 +59,12 @@ class Migration(migrations.Migration):
                 ('ticker', models.CharField(max_length=5)),
                 ('name', models.CharField(max_length=30)),
                 ('last_sale', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
-                ('average_daily_volume', models.BigIntegerField()),
+                ('market_cap', models.CharField(max_length=10)),
                 ('ipo_year', models.CharField(max_length=4)),
                 ('sector', models.CharField(max_length=30)),
                 ('industry', models.CharField(max_length=30)),
                 ('summary_quote', models.URLField()),
+                ('average_daily_volume', models.BigIntegerField()),
                 ('book_value', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('change', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('dividend_per_share', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
@@ -64,7 +74,6 @@ class Migration(migrations.Migration):
                 ('fifty_day_moving_avg', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('fifty_two_week_high', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('fifty_two_week_low', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
-                ('market_cap', models.CharField(max_length=10)),
                 ('price', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('price_book_ratio', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('price_earnings_growth_ratio', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
@@ -89,7 +98,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='account',
             name='articles',
-            field=models.ManyToManyField(to='scrapyr_app.Article', through='scrapyr_app.Portfolio'),
+            field=models.ManyToManyField(to='scrapyr_app.Article', through='scrapyr_app.Library'),
         ),
         migrations.AddField(
             model_name='account',

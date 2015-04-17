@@ -42,18 +42,18 @@ class Article(models.Model):
 class UserManager(models.Manager):
     def create_user(self, username, email):
         return self.model._default_manager.create(username=username, email=email)
-    def all(self, session=None):
-        return self.all()
+
                 
                 
 class CustomUser(models.Model):
      def __unicode__(self):
               return  self.username
-     username = models.CharField(max_length=128) 
+     username = models.CharField(max_length=128)
+     first_name = models.CharField(max_length=18)
+     last_name = models.CharField(max_length = 22)
      last_login = models.DateTimeField(blank=True, null=True)
      email = models.EmailField(default='myemail@fake.com')
      objects = UserManager()
-     
      def is_active(self):
          return True
          
@@ -82,10 +82,13 @@ class Account(models.Model):
     user = models.OneToOneField(CustomUser, unique=True)
     stocks = models.ManyToManyField(Stock, through='Portfolio')
     objects = AccountManager()
-    articles = models.ManyToManyField(Article, through='Portfolio')
+    articles = models.ManyToManyField(Article, through='Library')
 
 class Portfolio(models.Model):
-    stock = models.ForeignKey(Stock)                                                                                                          
+    stock = models.ForeignKey(Stock)
     profile = models.ForeignKey(Account)
+
+class Library(models.Model):
     article = models.ForeignKey(Article)
+    profile = models.ForeignKey(Account)
 # Create your models here.

@@ -91,11 +91,50 @@
   <script src="{% static 'scrapyr_app/js/gsdk-radio.js' %}"></script>
   <script src="{% static 'scrapyr_app/js/gsdk-bootstrapswitch.js' %}"></script>
   <script src="{% static 'scrapyr_app/js/get-shit-done.js' %}"></script>
-
+  <script src="{% static 'scrapyr_app/js/jquery.flexisel.js' %}"></script>
   <script src="{% static 'scrapyr_app/js/custom.js' %}"></script>
 
   <script type="text/javascript">
-    
+    $(window).load(function() {
+        $("#flexiselDemo1").flexisel({
+            enableResponsiveBreakpoints: true,
+            responsiveBreakpoints: { 
+                portrait: { 
+                    changePoint:480,
+                    visibleItems: 1
+                }, 
+                landscape: { 
+                    changePoint:640,
+                    visibleItems: 2
+                },
+                tablet: { 
+                    changePoint:768,
+                    visibleItems: 3
+                }
+            }
+          });
+
+     
+       $("#flexiselDemo2").flexisel({
+       enableResponsiveBreakpoints: true,
+       visibleItems: 6,
+            responsiveBreakpoints: { 
+                portrait: { 
+                    changePoint:480,
+                    visibleItems: 1
+                }, 
+                landscape: { 
+                    changePoint:640,
+                    visibleItems: 2
+                },
+                tablet: { 
+                    changePoint:768,
+                    visibleItems: 3
+                }
+            }
+    });
+   });
+
     $('.btn-tooltip').tooltip();
     $('.label-tooltip').tooltip();
     $('.pick-class-label').click(function(){
@@ -124,7 +163,79 @@
     $('.carousel').carousel({
     interval: 4000
     });
+     var big_image;
+        
+        var params_url = '';
+
+        $().ready(function(){
+            
+            var coupon = getUrlParameter('coupon');          
+            var ref = getUrlParameter('ref');
+            
+            has_param = 0;
+            
+            $('[rel="tooltip"]').tooltip();
+            
+            if(coupon){
+                addQSParm("coupon", coupon);
+            }
+            if(ref){
+                addQSParm("ref", ref);
+            }
+
+            if(coupon){
+                $('#buyButton').html('Buy now with 25% Discount');
+            }
+
+            if(ref){
+                kit_link = $(".navbar-brand").attr('href');
+                $(".navbar-brand").attr('href', kit_link + params_url);
+
+                $('.navbar-right a').each(function(){
+                    href = $(this).attr('href');
+                    if(href != '#'){
+                        $(this).attr('href',href + params_url);
+                    }
+                });
+            }
+
+            
+        });
+        
+        function getUrlParameter(sParam){
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) 
+            {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam){
+                    return sParameterName[1];
+                }
+            }
+        }   
+        
+        
+        
+        function addQSParm(name, value) {
+            var re = new RegExp("([?&]" + name + "=)[^&]+", "");
     
+            function add(sep) {
+                params_url += sep + name + "=" + encodeURIComponent(value);
+            }
+        
+            function change() {
+                params_url = params_url.replace(re, "$1" + encodeURIComponent(value));
+            }
+            if (params_url.indexOf("?") === -1) {
+                add("?");
+            } else {
+                if (re.test(params_url)) {
+                    change();
+                } else {
+                    add("&");
+                }
+            }
+        }
     
   </script>
 </html>

@@ -1,17 +1,28 @@
 {% extends "scrapyr_app/content_base.html" %}
 {% block content %}
 {% if user and not user.is_anonymous %}
-<h1 style="text-align:center;">Hello, {{ user.username }}!</h1>
+<h1 style="text-align:center;">Hello, {{ user.username }} you're a {{ user }} with id {{user.pk}}!</h1>
 <h1 style="text-align:center;"><small class="subtitle">Welcome to your profile page!</small></h1>
 <div class="subscribe-line">
   <div id="subscription" class="container">
     <div class="container">
       <div class="row">
 	<div class="col-md-9">
-	  <form class="">
+	  <form action="" method="post">
 	    <div class="form-group">
-	      <input style="border-color:transparent;" value="" class="form-control" placeholder="First Name" type="text">
-	    </div>
+	      <form id="category_form" method="post" action="/profile">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+	      <input type="submit" value="Update Profile" />
 	  </form>
 	</div>
 	<div class="col-md-3">
@@ -34,9 +45,6 @@
     </div>
   </div>
 </div>
-<h1 style="color:#fff">{{ user  }}:{{ email }} {{ message }}</h1>
-<h2>{{ type }}</h2><br>
-
 <br>
 {% else %}
 <h1>Nothing here!</h1>

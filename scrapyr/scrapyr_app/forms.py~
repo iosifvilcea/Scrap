@@ -1,0 +1,13 @@
+from django import forms
+from scrapyr_app.models import CustomUser
+'''
+class ProfileUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=18)
+    last_name = forms.CharField(max_length = 22)
+    email = forms.EmailField()
+    fields = ('first_name', 'last_name', 'email')
+    # An inline class to provide additional information on the form.
+    class Meta:
+        # Provide an association between the ModelForm and a model
+        model = CustomUser
+'''

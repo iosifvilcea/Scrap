@@ -1,18 +1,26 @@
 from django.contrib import admin
-from scrapyr_app.models import Account, Stock, Portfolio, CustomUser
+from scrapyr_app.models import Account, Stock, Portfolio, CustomUser, Article, Library
 
-class PortfolioInline(admin.TabularInline):
+class StockInline(admin.TabularInline):
       model = Portfolio
-      extra = 1
+      extra = 3
+
+class ArticleInline(admin.TabularInline):
+      model = Library
+      extra = 3 
+
 
 class StockAdmin(admin.ModelAdmin):
-      inlines = (PortfolioInline,)
+      inlines = [StockInline]
       
 class ArticleAdmin(admin.ModelAdmin):
-        inlines = (PortfolioInline,)
+      inlines = [ArticleInline]
 
 class AccountAdmin(admin.ModelAdmin):
-      inlines = (PortfolioInline,)
+      fieldsets = [
+        ('Username',               {'fields': ['user']}),
+      ]      
+      inlines = [StockInline, ArticleInline]
 
 class UserAdmin(admin.ModelAdmin):
       model = CustomUser
@@ -20,3 +28,4 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(Stock, StockAdmin)
 admin.site.register(Account, AccountAdmin)
 admin.site.register(CustomUser, UserAdmin)
+admin.site.register(Article, ArticleAdmin)
