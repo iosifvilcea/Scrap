@@ -9,6 +9,8 @@ from scrapyr_app.models import Account, CustomUser, Stock
 from django.shortcuts import redirect
 from scrapyr_app.forms import CustomUserForm
 from django.core.context_processors import csrf
+from yahoo_finance import Share
+import ystockquote 
 #from scrapyr_app.static import stocks
 #from scrapyr_app.forms import ProfileUpdateForm
 
@@ -34,6 +36,31 @@ def stock(request):
         companyName=request.POST['ticker']
         companyName = companyName.upper()
         stock = Stock.objects.get(ticker=companyName)
+        ystock = Share(companyName)
+        stock.book_value = ystockquote.get_book_value(companyName)  
+        stock.change = ystockquote.get_change(companyName) 
+        stock.dividend_per_share = ystockquote.get_dividend_per_share(companyName) 
+        stock.dividend_yield = ystockquote.get_dividend_yield(companyName) 
+        stock.ebitda = ystockquote.get_ebitda(companyName) 
+        stock.fifty_two_week_high = ystockquote.get_52_week_high(companyName) 
+        stock.fifty_two_week_low = ystockquote.get_52_week_low(companyName) 
+        stock.market_cap = ystockquote.get_market_cap(companyName) 
+        stock.short_ratio = ystockquote.get_short_ratio(companyName) 
+        stock.stock_exchange = ystockquote.get_stock_exchange(companyName) 
+        stock.volume = ystockquote.get_volume(companyName)
+        stock.price = ystockquote.get_price(companyName)
+        #yahoo_finance
+        stock.average_daily_volume = ystock.get_avg_daily_volume()
+        stock.earnings_per_share = ystock.get_price_earnings_ratio()
+        stock.fifty_day_moving_avg = ystock.get_50day_moving_avg()
+        stock.two_hundred_day_moving_avg =  ystock.get_200day_moving_avg()
+        stock.price_book_ratio = ystock.get_price_book()
+        stock.last_sale = ystock.get_price()
+        stock.price_earnings_growth_ratio = ystock.get_price_earnings_growth_ratio()
+        stock.price_earnings_ratio = ystock.get_price_earnings_ratio()
+        stock.price_sales_ratio = ystock.get_price_sales()
+        stock.save()
+
         context = RequestContext(request, {'request': request, 'stock':stock})
     return render_to_response('scrapyr_app/stock.html', context=context)
           
