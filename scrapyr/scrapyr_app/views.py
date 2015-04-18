@@ -100,7 +100,7 @@ def edit_profile(request):
             c_user.save()
             return redirect('scrapyr_app.views.index', user=request.user)
     form = CustomUserForm(instance=c_user)
-    return render(request, 'scrapyr_app/profile.html', {'form': form})
+    return render(request, 'scrapyr_app/edit_profile.html', {'form': form})
 
 ############################################################################## 
 def logout(request):
