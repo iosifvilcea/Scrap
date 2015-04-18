@@ -8,21 +8,7 @@
     <div class="container">
       <div class="row">
 	<div class="col-md-9">
-	  <form action="" method="post">
-	    <div class="form-group">
-	      <form id="category_form" method="post" action="/profile">
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-
-            {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}
-                {{ field }}
-            {% endfor %}
-	      <input type="submit" value="Update Profile" />
-	  </form>
+	  
 	</div>
       </div>
     </div>
