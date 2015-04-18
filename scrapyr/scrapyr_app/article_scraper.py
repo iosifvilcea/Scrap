@@ -12,8 +12,6 @@ article_websites = ["engadget", "techcrunch"]
 
 articles = []
 
-
-
 for site in article_websites:
 	r = requests.get("http://www." + site + ".com")
 	print site
@@ -39,9 +37,3 @@ for article in articles:
 	a.parse()
 	# print a.title
 	a.nlp()
-
-
-
-
-
-		

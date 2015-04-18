@@ -46,9 +46,7 @@ class Article(models.Model):
 
 class UserManager(models.Manager):
     def create_user(self, username, email):
-        return self.model._default_manager.create(username=username, email=email)
-
-                
+        return self.model._default_manager.create(username=username, email=email)          
                 
 class CustomUser(models.Model):
      def __unicode__(self):
@@ -79,7 +77,6 @@ class AccountManager(models.Manager):
         return self.model._default_manager.create(user=user)
     def all(self, session=None):
         return self.all()
-
 
 class Account(models.Model):
     def __unicode__(self):

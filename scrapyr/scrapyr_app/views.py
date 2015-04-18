@@ -1,5 +1,5 @@
 from django.db import models
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect 
 from django.shortcuts import render_to_response, redirect, render, get_object_or_404
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import AnonymousUser
@@ -8,6 +8,7 @@ from django.template import RequestContext
 from scrapyr_app.models import Account, CustomUser, Stock 
 from django.shortcuts import redirect
 from scrapyr_app.forms import CustomUserForm
+from django.core.context_processors import csrf
 #from scrapyr_app.static import stocks
 #from scrapyr_app.forms import ProfileUpdateForm
 
@@ -15,7 +16,6 @@ def stocks(request):
     stocks = Stock.objects.all()
     context = RequestContext(request, {'request': request, 'stocks':stocks})
     return render_to_response('scrapyr_app/stocks.html', context=context)
-
 
 # View for Single stock login not required 
 # If no stock is requested sent them to our 
@@ -32,12 +32,10 @@ def stock(request):
         stock = Stock.objects.get(ticker=companyName)
         context = RequestContext(request, {'request': request, 'stock':stock})
     return render_to_response('scrapyr_app/stock.html', context=context)
-      
-      
+          
 def index(request):
     #return HttpResponse("Hello, world. You're at the scrapyr index.")
     return render(request, 'scrapyr_app/index.html')
-
 
 # login page redirects to profile if logged in
 # need to change case for anonymous user to redirect 
@@ -55,10 +53,6 @@ def login(request):
     return render_to_response('scrapyr_app/login.html', context=context)
     #return render(request, 'scrapyr_app/login.html')
       
-
-
-
-
 
 # dashboard is currently not a functioning view
 @login_required(login_url='/')
@@ -86,21 +80,18 @@ def profile(request):
         
     return render(request, 'scrapyr_app/profile.html')
  
-
-
 def edit_profile(request):
     if request.user.__class__.__name__ is 'CustomUser':
         c_user = get_object_or_404(CustomUser, pk= request.user.pk)
     else:
         return render_to_response('scrapyr_app/login.html')
         
-    if request.method == 'POST':
+    if request.POST:
         form = CustomUserForm(request.POST, instance=c_user)
         if form.is_valid():
             c_user = form.save(commit=False)
-            c_user.username = request.user.username
             c_user.save()
-            return redirect('scrapyr_app.views.index', user=request.user)
+            #return redirect('scrapyr_app/edit_profile.html', user=request.user)
     form = CustomUserForm(instance=c_user)
     return render(request, 'scrapyr_app/edit_profile.html', {'form': form})
 
@@ -108,4 +99,3 @@ def edit_profile(request):
 def logout(request):
     auth_logout(request)
     return redirect('/')
-

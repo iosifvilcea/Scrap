@@ -9,7 +9,6 @@ class ArticleInline(admin.TabularInline):
       model = Library
       extra = 3 
 
-
 class StockAdmin(admin.ModelAdmin):
       inlines = [StockInline]
       
