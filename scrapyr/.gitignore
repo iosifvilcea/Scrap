@@ -1,5 +1,6 @@
 scrapyr/settings.pyc
 scrapyr_app/*.pyc
-v/
+../v
+../v*
 scrapyr/*.pyc
 *.pyc

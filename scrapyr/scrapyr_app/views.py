@@ -9,8 +9,8 @@ from scrapyr_app.models import Account, CustomUser, Stock
 from django.shortcuts import redirect
 from scrapyr_app.forms import CustomUserForm
 from django.core.context_processors import csrf
-from yahoo_finance import Share
-import ystockquote 
+from yahoo_finance import *
+from ystockquote import * 
 #from scrapyr_app.static import stocks
 #from scrapyr_app.forms import ProfileUpdateForm
 
@@ -36,6 +36,7 @@ def stock(request):
         companyName=request.POST['ticker']
         companyName = companyName.upper()
         stock = Stock.objects.get(ticker=companyName)
+        the_price = ystock.get_price()
         ystock = Share(companyName)
         stock.book_value = ystockquote.get_book_value(companyName)  
         stock.change = ystockquote.get_change(companyName) 
@@ -48,7 +49,7 @@ def stock(request):
         stock.short_ratio = ystockquote.get_short_ratio(companyName) 
         stock.stock_exchange = ystockquote.get_stock_exchange(companyName) 
         stock.volume = ystockquote.get_volume(companyName)
-        stock.price = ystockquote.get_price(companyName)
+        stock.price = ystock.get_price()
         #yahoo_finance
         stock.average_daily_volume = ystock.get_avg_daily_volume()
         stock.earnings_per_share = ystock.get_price_earnings_ratio()
@@ -60,8 +61,7 @@ def stock(request):
         stock.price_earnings_ratio = ystock.get_price_earnings_ratio()
         stock.price_sales_ratio = ystock.get_price_sales()
         stock.save()
-
-        context = RequestContext(request, {'request': request, 'stock':stock})
+        context = RequestContext(request, {'request': request, 'stock':stock, 'price_new':the_price })
     return render_to_response('scrapyr_app/stock.html', context=context)
           
 def index(request):
