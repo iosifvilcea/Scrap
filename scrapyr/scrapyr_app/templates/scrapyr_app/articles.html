@@ -1,0 +1,43 @@
+{% extends "scrapyr_app/content_base.html" %}
+{% block content %}
+<div class="section section-gray">
+<div class="container">
+<div class="row" id="profile-cards">
+{% for article in articles  %}
+{% if  forloop.counter|divisibleby:"4" %}
+<div class="row" id="profile-cards">
+{% endif %}
+<div class="col-md-3">
+  <div class="card card-user">                           
+    <div class="image">                            
+    </div>
+    <div class="content">
+      <div class="author">
+	<a href="#">
+	  <img class="avatar border-gray" src="http://content.nasdaq.com/logos/{{ stock.ticker }}.gif" alt="{{ stock.ticker }}" />
+	  <h4 class="title">{{ article.title }} <br />
+	    <small>{{ article.author}}</small>
+          </h4> 
+	</a>
+      </div>  
+      <p class="description text-center"> 
+	"{{ article.pub_date }}"
+      </p>
+    </div>
+                            <hr>
+                            <div class="text-center">
+                                <button href="#" class="btn btn-social btn-facebook btn-simple"><i class="fa fa-facebook-square"></i></button>
+                                <button href="#" class="btn btn-social btn-twitter btn-simple"><i class="fa fa-twitter"></i></button>
+                                <button href="#" class="btn btn-social btn-google btn-simple"><i class="fa fa-google-plus-square"></i></button>
+    
+                            </div>
+                        </div> <!-- end card -->
+</div>
+{% if  forloop.counter|divisibleby:"4" %}
+</div>
+{% endif %}
+{% endfor %}
+</div>
+</div>
+</div>
+{% endblock %}
