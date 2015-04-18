@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import permalink
 
 class Stock(models.Model):
       def __unicode__(self):
@@ -30,6 +31,10 @@ class Stock(models.Model):
       stock_exchange = models.CharField(max_length=7)
       two_hundred_day_moving_avg = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       volume = models.BigIntegerField(default=0)
+      
+      @permalink
+      def get_absolute_url(self):
+            return ('view_post', None, { 'ticker': self.ticker })
 
 
 class Article(models.Model):

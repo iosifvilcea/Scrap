@@ -21,7 +21,9 @@ def stocks(request):
 # If no stock is requested sent them to our 
 # awesome list of stocks
 
-
+def view_stock(request, ticker):
+    stock = get_object_or_404(Stock, ticker=ticker)
+    return render_to_response("scrapyr_app/stock.html", dict(stock=stock))
 
 def stock(request):
     if request.method == 'POST':
