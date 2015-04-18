@@ -3,3 +3,4 @@ scrapyr/settings.pyc
 scrapyr_app/*.pyc
 v/
 scrapyr/*.pyc
+*.pyc

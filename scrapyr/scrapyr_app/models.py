@@ -4,7 +4,7 @@ from django.db.models import permalink
 class Stock(models.Model):
       def __unicode__(self):
                return 'TAG: ' + self.ticker
-      ticker = models.CharField(max_length=5)
+      ticker = models.SlugField()
       name = models.CharField(max_length=30)
       last_sale = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       market_cap = models.CharField(max_length=10)
@@ -34,7 +34,7 @@ class Stock(models.Model):
       
       @permalink
       def get_absolute_url(self):
-            return ('view_post', None, { 'ticker': self.ticker })
+            return ('view_stock', None, { 'ticker': self.ticker })
 
 
 class Article(models.Model):
@@ -43,6 +43,10 @@ class Article(models.Model):
     pub_date = models.DateTimeField()
     content = models.TextField()
     stocks = models.ManyToManyField(Stock)
+
+    @permalink
+    def get_absolute_url(self):
+        return ('view_category', None, { 'title': self.title })
 
 class UserManager(models.Manager):
     def create_user(self, username, email):

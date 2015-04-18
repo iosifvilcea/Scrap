@@ -13,9 +13,9 @@
     </div>
     <div class="content">
       <div class="author">
-	<a href="#">
+	<a href="{{ stock.get_absolute_url }}">
 	  <img class="avatar border-gray" src="http://content.nasdaq.com/logos/{{ stock.ticker }}.gif" alt="{{ stock.ticker }}" />
-	  <h4 class="title">{{ stock.name }} <br />
+	  <h4 class="title">{{ stock.name }} ::: {{ stock.ticker}} <br />
 	    <small>{{stock.sector}}</small>
           </h4> 
 	</a>
