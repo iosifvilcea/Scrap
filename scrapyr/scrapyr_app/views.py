@@ -7,9 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from scrapyr_app.models import Account, CustomUser, Stock 
 from django.shortcuts import redirect
-from scrapyr_app.forms import CustomUserForm
 from django.core.context_processors import csrf
 from yahoo_finance import Share
+from scrapyr_app.forms import *
 import ystockquote 
 #from scrapyr_app.static import stocks
 #from scrapyr_app.forms import ProfileUpdateForm
@@ -31,6 +31,20 @@ def view_article(request, ticker):
     article = get_object_or_404(Article, ticker=ticker)
     return render_to_response("scrapyr_app/article.html", dict(article=article))
 
+def stockfeed(request):
+    if request.method == "POST":
+        sf_input = []
+        form = StockFeedForm(request.POST)
+        if(form.is_valid()):
+            sf_input.append(request.POST['sf_input'])
+        return render_to_response('scrapyr_app/stockfeed.html',
+                                  {'success': sf_input, 'form':StockFeedForm()},
+                                 context_instance=RequestContext(request))
+    else:        
+        return render_to_response('scrapyr_app/stockfeed.html',
+                                  {'form':StockFeedForm()},
+                                 context_instance=RequestContext(request))
+ 
 def stock(request):
     if request.method == 'POST':
         companyName=request.POST['ticker']
