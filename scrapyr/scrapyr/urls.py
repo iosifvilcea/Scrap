@@ -12,6 +12,7 @@ urlpatterns = [
 #    url(r'^home/$', 'scrapyr_app.views.dashboard'),
     url(r'^logout/$', 'scrapyr_app.views.logout'),
     url(r'^profile/$', 'scrapyr_app.views.profile'),
+    url(r'^edit/$', 'scrapyr_app.views.edit_profile'),
     url(r'^stocks/$', 'scrapyr_app.views.stocks'),
     url(r'^stock/[A-Z]*$', 'scrapyr_app.views.stock'),
 ]
