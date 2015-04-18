@@ -1,7 +1,7 @@
 {% extends "scrapyr_app/content_base.html" %}
 {% block content %}
 {% if user and not user.is_anonymous %}
-<h1 style="text-align:center;">Hello, {{ user.username }} you're a {{ user }} with id {{user.pk}}!</h1>
+<h1 style="text-align:center;">Hello, {{ user.first_name }} {{ user.last_name }} <br> Username: {{ user.username }} <br> ID:{{user.pk}}</h1>
 <h1 style="text-align:center;"><small class="subtitle">Welcome to your edit profile page!</small></h1>
 <div class="subscribe-line">
   <div id="subscription" class="container">
