@@ -25,6 +25,7 @@ def stocks(request):
 def stock(request):
     if request.method == 'POST':
         companyName=request.POST['ticker']
+        companyName = companyName.upper()
         stock = Stock.objects.get(ticker=companyName)
         context = RequestContext(request, {'request': request, 'stock':stock})
     return render_to_response('scrapyr_app/stock.html', context=context)

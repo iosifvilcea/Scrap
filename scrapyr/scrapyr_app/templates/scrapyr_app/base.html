@@ -55,12 +55,23 @@
 		    <a href="javascript:void(0);" data-toggle="search" class="hidden-xs"><i class="fa fa-search"></i></a>
 		  </li>
 		</ul>
-		<form class="navbar-form navbar-left navbar-search-form" role="search">
+		
+        
+        <form class="navbar-form navbar-left navbar-search-form" method="POST" action="stock/" role="search">
+		  <div class="form-group">
+		    <input name="ticker" id="stock_tag" type="text" value="" class="form-control" placeholder="Search...">
+	          {% csrf_token %}
+          </div>
+		</form>
+        <!--
+        <form class="navbar-form navbar-left navbar-search-form" role="search">
 		  <div class="form-group">
 		    <input type="text" value="" class="form-control" placeholder="Search...">
 		  </div>
 		</form>
-		<ul class="nav navbar-nav navbar-right">
+        -->
+        
+        <ul class="nav navbar-nav navbar-right">
 		  <li><a href="/login">Sign Up</a></li>
 		  
 		  <li style="padding-top:0px;"><a href="/login" style="padding-top:0px; margin-top:0px;"><button class="btn btn-round btn-default">Sign In</button></a></li>
