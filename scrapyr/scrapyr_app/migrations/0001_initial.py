@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
             name='Stock',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('ticker', models.CharField(max_length=5)),
+                ('ticker', models.SlugField()),
                 ('name', models.CharField(max_length=30)),
                 ('last_sale', models.DecimalField(default=0, max_digits=15, decimal_places=2)),
                 ('market_cap', models.CharField(max_length=10)),
