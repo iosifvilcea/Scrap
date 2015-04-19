@@ -1,8 +1,9 @@
 import requests
 import re
-from newspaper import Article
+import newspaper
 from lxml import html
 from bs4 import BeautifulSoup
+from scrapyr_app.models import Article
 '''import sys 
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), 'scrapyr'))
@@ -19,7 +20,7 @@ article_websites = ["engadget", "techcrunch"]
 
 #article_comment_re = re.compile('http://techcrunch\.com/20[0-9][0-9]/[0-1][0-9]/[0-3][0-9]/.*/#comments')
 
-#articles = []
+articles = []
 
 def scraper(article_websites):
 	articles = []
@@ -42,9 +43,10 @@ def scraper(article_websites):
 				print str(te)
 	return articles
 
+articles = scraper(article_websites)
 '''
 for article in articles:
-	a = Article(article)
+	a = newspaper.Article(article)
 	a.download()
 	a.parse()
 	# print a.title
@@ -52,13 +54,13 @@ for article in articles:
 
 	article_keywords = []
 	for word in a.keywords:
-		if word.capitalize() in companies:
-			article_keywords.append(word.capitalize())
+	    if word.capitalize() in companies:
+		    article_keywords.append(word.capitalize())
 
-
-
-	db_article = A(a.title, a.authors, a.publish_date, a.html)
-
-	db_article.save()
-
-'''
+    article_authors = []
+    for author in a.authors:
+        article_authors.append(author.encode('ascii', 'ignore'))
+    author_db = ", ".join(article_authors)
+    db_article = Article(title=a.title, author=author_db, pub_date=a.publish_date, content=a.text, url=article)
+    db_article.save()
+    '''

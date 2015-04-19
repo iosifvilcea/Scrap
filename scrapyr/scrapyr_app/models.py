@@ -38,6 +38,8 @@ class Stock(models.Model):
 
 
 class Article(models.Model):
+    def __unicode__(self):
+               return self.title
     title = models.CharField(max_length=80)
     author = models.CharField(max_length=40)
     pub_date = models.DateTimeField()
