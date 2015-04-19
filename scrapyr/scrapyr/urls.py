@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^profile/$', 'scrapyr_app.views.profile'),
     url(r'^edit/$', 'scrapyr_app.views.edit_profile'),
     url(r'^stock/(?P<ticker>[^\.]+)', 'scrapyr_app.views.view_stock', name='view_stock'),
-    url(r'^stock/(?P<title>[^\.]+)', 'scrapyr_app.views.view_article', name='view_article'),
+    url(r'^article/(?P<slug>[^\.]+)', 'scrapyr_app.views.view_article', name='view_article'),
     url(r'^stocks/$', 'scrapyr_app.views.stocks'),
     url(r'^stock/$', 'scrapyr_app.views.stock'),
     url(r'^stockfeed/$', 'scrapyr_app.views.stockfeed'),

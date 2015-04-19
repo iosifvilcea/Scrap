@@ -38,15 +38,21 @@ def view_stock(request, ticker):
     
     return render_to_response("scrapyr_app/stock.html", dict(stock=stock), dict(account=account))
 
-def view_article(request, title):
-    if request.user.__class__.__name__ is 'CustomUser':
-        c_user = get_object_or_404(CustomUser, pk= request.user.pk) 
-        account = Account.objects.get(user=c_user)
-    else:
-        account = False
-    article = get_object_or_404(Article, title=title)
 
-    return render_to_response("scrapyr_app/article.html", dict(article=article), dict(account=account))
+def view_article(request, slug):
+    article = get_object_or_404(Article, slug=slug)
+    return render_to_response("scrapyr_app/article.html", dict(article=article))
+
+#def view_article(request, title):
+#    if request.user.__class__.__name__ is 'CustomUser':
+ #       c_user = get_object_or_404(CustomUser, pk= request.user.pk) 
+  #      account = Account.objects.get(user=c_user)
+   # else:
+    #    account = False
+    #article = get_object_or_404(Article, title=title)
+
+   # return render_to_response("scrapyr_app/article.html", dict(article=article), dict(account=account))
+
 
 def stockfeed(request):
     if request.user.__class__.__name__ is 'CustomUser':
