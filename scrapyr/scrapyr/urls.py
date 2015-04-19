@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^stock/(?P<title>[^\.]+)', 'scrapyr_app.views.view_article', name='view_article'),
     url(r'^stocks/$', 'scrapyr_app.views.stocks'),
     url(r'^stock/$', 'scrapyr_app.views.stock'),
+    url(r'^stockfeed/$', 'scrapyr_app.views.stockfeed'),
 ]

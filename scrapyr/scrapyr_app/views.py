@@ -32,18 +32,14 @@ def view_article(request, ticker):
     return render_to_response("scrapyr_app/article.html", dict(article=article))
 
 def stockfeed(request):
-    if request.method == "POST":
-        sf_input = []
-        form = StockFeedForm(request.POST)
-        if(form.is_valid()):
-            sf_input.append(request.POST['sf_input'])
-        return render_to_response('scrapyr_app/stockfeed.html',
-                                  {'success': sf_input, 'form':StockFeedForm()},
-                                 context_instance=RequestContext(request))
-    else:        
-        return render_to_response('scrapyr_app/stockfeed.html',
-                                  {'form':StockFeedForm()},
-                                 context_instance=RequestContext(request))
+    if request.user.__class__.__name__ is 'CustomUser':
+        c_user = get_object_or_404(CustomUser, pk= request.user.pk)
+    else:
+        return render_to_response('scrapyr_app/login.html')
+        
+    account = Account.objects.get(user=c_user)
+
+    return redirect('scrapyr_app/stockfeed.html')
  
 def stock(request):
     if request.method == 'POST':
