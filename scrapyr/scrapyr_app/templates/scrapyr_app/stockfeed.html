@@ -7,16 +7,13 @@
             <div class="col-md-6">
                 GRAPH GOES HERE GUYS!!11
             </div>  
-            <div class="col-md-6">
-            Title?
-            </div>
           </div>
           <div class="row">
-            <div class="col-md-6 col-md-offset-6">
+            <div class="col-md-4 col-md-offset-8">
               <div class="list-group">
-                <a href="#" class="list-group-item"> words </a>
-                <a href="#" class="list-group-item">Planet Holywood</a>
-                <a href="#" class="list-group-item">RadioShack</a>
+                  {% for s in account.stocks.all %}
+                  <a href= {{ s.get_absolute_url }} class="list-group-item"> {{ s.name }} </a>
+                  {% endfor %}
               </div>
             </div>
           </div>

@@ -39,7 +39,7 @@ def stockfeed(request):
         
     account = Account.objects.get(user=c_user)
 
-    return redirect('scrapyr_app/stockfeed.html')
+    return render_to_response('scrapyr_app/stockfeed.html', dict(account=account))
  
 def stock(request):
     if request.method == 'POST':
