@@ -47,8 +47,11 @@ def stock(request):
         companyName = companyName.upper()
         stock = Stock.objects.get(ticker=companyName)
         namer = "'"+companyName+"'"
-        ystock = Share('GOOG')
+        ystock = Share(companyName)
         the_price = ystock.get_price()
+
+        root_url = "http://finance.yahoo.com/q/pr?s=" + companyName + "+Profile"
+
         #stock.book_value = ystockquote.get_book_value(companyName)  
         #stock.change = ystockquote.get_change(companyName) 
         #stock.dividend_per_share = ystockquote.get_dividend_per_share(companyName) 
