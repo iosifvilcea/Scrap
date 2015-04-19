@@ -41,6 +41,7 @@ class Article(models.Model):
     def __unicode__(self):
                return self.title
     title = models.CharField(max_length=80)
+    slug = models.CharField(max_length=50, default="")
     author = models.CharField(max_length=40)
     pub_date = models.DateTimeField()
     content = models.TextField()
@@ -49,7 +50,7 @@ class Article(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('view_category', None, { 'title': slugify(self.title) })
+        return ('view_article', None, {'slug': self.slug})
 
 class UserManager(models.Manager):
     def create_user(self, username, email):
