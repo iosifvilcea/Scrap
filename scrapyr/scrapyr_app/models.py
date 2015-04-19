@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import permalink
-
+from django.template.defaultfilters import slugify 
 class Stock(models.Model):
       def __unicode__(self):
                return 'TAG: ' + self.ticker
@@ -49,7 +49,7 @@ class Article(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('view_category', None, { 'title': self.title })
+        return ('view_category', None, { 'title': slugify(self.title) })
 
 class UserManager(models.Manager):
     def create_user(self, username, email):
