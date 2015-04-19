@@ -5,7 +5,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from scrapyr_app.models import Account, CustomUser, Stock 
+from scrapyr_app.models import Account, CustomUser, Stock, Article 
 from django.shortcuts import redirect
 from django.core.context_processors import csrf
 from yahoo_finance import Share
@@ -19,6 +19,11 @@ def stocks(request):
     context = RequestContext(request, {'request': request, 'stocks':stocks})
     return render_to_response('scrapyr_app/stocks.html', context=context)
 
+def articles(request):
+    articles = Article.objects.all()
+    context = RequestContext(request, {'request': request, 'articles': articles})
+    return render_to_response('scrapyr_app/articles.html', context=context)
+
 # View for Single stock login not required 
 # If no stock is requested sent them to our 
 # awesome list of stocks
@@ -27,8 +32,8 @@ def view_stock(request, ticker):
     stock = get_object_or_404(Stock, ticker=ticker)
     return render_to_response("scrapyr_app/stock.html", dict(stock=stock))
 
-def view_article(request, ticker):
-    article = get_object_or_404(Article, ticker=ticker)
+def view_article(request, title):
+    article = get_object_or_404(Article, title=title)
     return render_to_response("scrapyr_app/article.html", dict(article=article))
 
 def stockfeed(request):

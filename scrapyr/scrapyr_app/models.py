@@ -38,11 +38,14 @@ class Stock(models.Model):
 
 
 class Article(models.Model):
+    def __unicode__(self):
+               return self.title
     title = models.CharField(max_length=80)
     author = models.CharField(max_length=40)
     pub_date = models.DateTimeField()
     content = models.TextField()
     stocks = models.ManyToManyField(Stock)
+    url = models.URLField(max_length=300, default="www.google.com")
 
     @permalink
     def get_absolute_url(self):
