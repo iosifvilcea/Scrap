@@ -4,3 +4,4 @@ scrapyr_app/*.pyc
 ../v*
 scrapyr/*.pyc
 *.pyc
+db.sqlite3
