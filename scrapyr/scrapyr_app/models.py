@@ -43,6 +43,7 @@ class Article(models.Model):
     pub_date = models.DateTimeField()
     content = models.TextField()
     stocks = models.ManyToManyField(Stock)
+    url = models.URLField(max_length=300, default="www.google.com")
 
     @permalink
     def get_absolute_url(self):
