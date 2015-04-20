@@ -25,7 +25,7 @@
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Stock Information
+                    Company Description
                   </a>
                 </h4>
               </div>
@@ -47,6 +47,7 @@
                 <div class="panel-body">
                   <ul style="padding-left: 20px;">
                     <li style="list-style-position: outside;"> Short Ratio: {{ stock.short_ratio}}</li>
+		    <li style="list-style-position: outside;"> Price Book Ratio: {{ stock.price_book_ratio }}</li>
                     <li style="list-style-position: outside;"> Price Earnings Growth Ratio:{{ stock.price_earnings_growth_ratio }}</li>
                     <li style="list-style-position: outside;"> Price Earnings Ratio: {{ stock.price_earnings_ratio}}</li>
                     <li style="list-style-position: outside;"> Price Sales Ratio: {{ stock.price_sales_ratio }}</li>
@@ -58,13 +59,16 @@
               <div class="panel-heading" role="tab" id="headingThree">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Details
+                    Metrics & Indicators
                   </a>
                 </h4>
               </div>
               <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                 <div class="panel-body">
-                  85% wool, 15% linen. Dry-clean only
+		  <li style="list-style-position: outside;"> Fifty Day Moving Average: {{ stock.fifty_day_moving_avg}}</li>
+		  <li style="list-style-position: outside;"> Twohundred Day Moing Average: {{ stock.two_hundred_day_moving_avg }}</li>
+		  <li style="list-style-position: outside;"> Average Daily Volume: {{ stock.average_daily_volume }}</li>
+		  <li style="list-style-position: outside;"> Market Cap: {{ stock.market_cap }}</li>
                 </div>
               </div>
             </div>
@@ -72,14 +76,14 @@
               <div class="panel-heading" role="tab" id="headingFour">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                    Delivery & Return
+                    Price & Other Information
                   </a>
                 </h4>
               </div>
               <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                 <div class="panel-body">
-                  Find out more about our delivery options
-                  Please try items in the comfort of your own home. If you don't like them, or they don't fit, we'll happily collect them from your home or office for free.
+                   <li style="list-style-position: outside;"> Book Value: {{ stock.book_value }}</li>
+		   <li style="list-style-position: outside;"> Last Price: {{ stock.last_price }}</li>
                 </div>
               </div>
             </div>
