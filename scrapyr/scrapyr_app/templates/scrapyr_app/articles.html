@@ -14,7 +14,12 @@
     <div class="content">
       <div class="author">
 	<a href=" {{ article.url }}">
+    {% if "techcrunch" in article.url %}
 	  <img class="avatar border-gray" src="https://s0.wp.com/wp-content/themes/vip/techcrunch-2013/assets/images/logo.svg" alt="TechCrunch" />
+    {% endif %}
+    {% if "engadget" in article.url %}
+     <img class="avatar border-gray" src="https://pbs.twimg.com/profile_images/554498681664061440/i0YCFYG2.png" alt="TechCrunch" />
+     {% endif %}
 	  <h4 class="title">{{ article.title }} <br />
 	    <small>{{ article.author}}</small>
 	    <a href="{{ article.get_absolute_url }}"><h5>View Article Stats</h5></a>
