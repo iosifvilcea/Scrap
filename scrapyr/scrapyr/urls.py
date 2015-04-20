@@ -15,5 +15,4 @@ urlpatterns = [
     url(r'^stock/$', 'scrapyr_app.views.stock'),
     url(r'^stockfeed/$', 'scrapyr_app.views.stockfeed'),
     url(r'^articles/$', 'scrapyr_app.views.articles'),
-
 ]
