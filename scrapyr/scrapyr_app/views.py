@@ -134,6 +134,43 @@ def stock(request):
         stock.price_sales_ratio = ystock.get_price_sales()
         stock.save()
         context = RequestContext(request, dict(account=account, request=request, stock=stock))
+        vl  = []
+        acl = []
+        hl  = []
+        ll  = []
+        cl  = []
+        ol  = []
+        days_list = []
+        d = 0
+        seven_days_ago = datetime.datetime.now() + datetime.timedelta(-30)
+        today = datetime.datetime.now()
+        days = ystockquote.get_historical_prices('GOOGL', seven_days_ago.strftime("%Y-%m-%d"), today.strftime("%Y-%m-%d"))
+        for day in days.keys():
+            d+=1
+            date_label = datetime.datetime.now() + datetime.timedelta(-d)
+            days_list.append(date_label.strftime("%Y-%m-%d"))
+            day_info = days.get(day)
+            vol =  int(day_info.get('Volume'))
+            vl.append(vol)
+            adjcl = float(day_info.get('Adj Close'))
+            acl.append(adjcl)
+            highs = float(day_info.get('High'))
+            hl.append(highs)
+            lows = float(day_info.get('Low'))
+            ll.append(lows)
+            closes = float(day_info.get('Close'))
+            cl.append(closes)
+            opens = float(day_info.get('Open'))
+            ol.append(opens)
+        
+         volume = vl
+         lows = ll
+         opens = ol
+         highs = hl
+         averages = acl
+         closes = cl
+         days = days_list[::-1]
+
     return render_to_response('scrapyr_app/stock.html', context=context)
           
 def index(request):
