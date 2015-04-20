@@ -13,18 +13,22 @@
       <div class="row">
 	    <h4 style="text-align:center;">
         <div class="row">
+        {% if account.stocks %}
           <div class="col-lg-4">
             Stocks
             {% for s in account.stocks.all  %}
               <a href={{ s.get_absolute_url }} class="list-group-item"> {{s.name}} ( {{ s.ticker }} ) </a>
             {% endfor %}
           </div>
+        {% endif %}
+        {% if account.articles %}
           <div class="col-md-offset-4">
             Articles
             {% for s in account.articles.all  %}
               <a href={{ s.get_absolute_url }} class="list-group-item"> {{s.title}} by {{ s.author }} </a>
             {% endfor %}
           </div>
+        {% endif %}
         </div>
         </h4>
       </div>
