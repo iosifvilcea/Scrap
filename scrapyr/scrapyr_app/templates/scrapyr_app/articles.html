@@ -32,9 +32,11 @@
     </div>
                             <hr>
                             <div class="text-center">
-                                <div>
-                                  <input id="addfavesbutton" type="button" name="add_article" value="Add To Faves">
-                                </div>
+                                <p>
+
+                                        <button id ="addfave" data-catid="{{article.id}}" class="btn btn-mini btn-primary" type="button">Add Fave</button>
+
+                                </p>
     
                             </div>
                         </div> <!-- end card -->
@@ -47,3 +49,5 @@
 </div>
 </div>
 {% endblock %}
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
