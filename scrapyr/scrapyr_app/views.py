@@ -17,13 +17,27 @@ import re
 #from scrapyr_app.forms import ProfileUpdateForm
 
 def stocks(request):
+    if request.user.__class__.__name__ is 'CustomUser':
+        c_user = get_object_or_404(CustomUser, pk= request.user.pk) 
+        account = Account.objects.get(user=c_user)
+    else:
+        account = False
+
     stocks = Stock.objects.all()
-    context = RequestContext(request, {'request': request, 'stocks':stocks})
+    context = RequestContext(request, {'request': request, 'stocks':stocks,
+                                       'account':dict(account=account)})
     return render_to_response('scrapyr_app/stocks.html', context=context)
 
 def articles(request):
+    if request.user.__class__.__name__ is 'CustomUser':
+        c_user = get_object_or_404(CustomUser, pk= request.user.pk) 
+        account = Account.objects.get(user=c_user)
+    else:
+        account = False
+
     articles = Article.objects.all()
-    context = RequestContext(request, {'request': request, 'articles': articles})
+    context = RequestContext(request, {'request': request, 'articles': articles,
+                                       'account':dict(account=account)})
     return render_to_response('scrapyr_app/articles.html', context=context)
 
 # View for Single stock login not required 
@@ -41,8 +55,14 @@ def view_stock(request, ticker):
 
 
 def view_article(request, slug):
+    if request.user.__class__.__name__ is 'CustomUser':
+        c_user = get_object_or_404(CustomUser, pk= request.user.pk) 
+        account = Account.objects.get(user=c_user)
+    else:
+        account = False
+
     article = get_object_or_404(Article, slug=slug)
-    return render_to_response("scrapyr_app/article.html", dict(article=article))
+    return render_to_response("scrapyr_app/article.html", dict(article=article, account=account))
 
 #def view_article(request, title):
 #    if request.user.__class__.__name__ is 'CustomUser':
@@ -182,7 +202,7 @@ def edit_profile(request):
             c_user.save()
             #return redirect('scrapyr_app/edit_profile.html', user=request.user)
     form = CustomUserForm(instance=c_user)
-    return render(request, 'scrapyr_app/edit_profile.html', {'form': form}, dict(account=account))
+    return render(request, 'scrapyr_app/edit_profile.html', {'form': form, 'account':dict(account=account)})
 
 ############################################################################## 
 def logout(request):
