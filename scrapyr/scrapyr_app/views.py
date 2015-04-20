@@ -163,13 +163,13 @@ def stock(request):
             opens = float(day_info.get('Open'))
             ol.append(opens)
         
-         volume = vl
-         lows = ll
-         opens = ol
-         highs = hl
-         averages = acl
-         closes = cl
-         days = days_list[::-1]
+        volume = vl
+        lows = ll
+        opens = ol
+        highs = hl
+        averages = acl
+        closes = cl
+        days = days_list[::-1]
 
     return render_to_response('scrapyr_app/stock.html', context=context)
           
