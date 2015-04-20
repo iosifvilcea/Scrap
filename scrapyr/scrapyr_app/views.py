@@ -11,6 +11,8 @@ from django.core.context_processors import csrf
 from yahoo_finance import Share
 from scrapyr_app.forms import *
 import ystockquote 
+import urllib
+import re
 #from scrapyr_app.static import stocks
 #from scrapyr_app.forms import ProfileUpdateForm
 
@@ -30,13 +32,12 @@ def articles(request):
 
 def view_stock(request, ticker):
     if request.user.__class__.__name__ is 'CustomUser':
-        c_user = get_object_or_404(CustomUser, pk= request.user.pk) 
+        c_user = get_object_or_404(CustomUser, pk= request.user.pk)
         account = Account.objects.get(user=c_user)
     else:
         account = False
     stock = get_object_or_404(Stock, ticker=ticker)
-    
-    return render_to_response("scrapyr_app/stock.html", dict(stock=stock), dict(account=account))
+    return render_to_response("scrapyr_app/stock.html", dict(stock=stock, account=account))
 
 
 def view_article(request, slug):
@@ -78,8 +79,17 @@ def stock(request):
         ystock = Share(companyName)
         the_price = ystock.get_price()
 
-        root_url = "http://finance.yahoo.com/q/pr?s=" + companyName + "+Profile"
+        regex = 'Business Summary</span></th><th align="right">&nbsp;</th></tr></table><p>(.+?)</p>'
+        pattern = re.compile(regex)
+        
+        root_url = urllib.urlopen("http://finance.yahoo.com/q/pr?s=" + companyName + "+Profile")
+        htmltext = root_url.read()
 
+        decoded_str = str(re.findall(pattern, htmltext)).decode("utf8")
+        encoded_str = decoded_str.encode('ascii', 'ignore')
+        stock.description = encoded_str
+        stock.description = stock.description[:-2]
+        stock.description = stock.description[2:]
         #stock.book_value = ystockquote.get_book_value(companyName)  
         #stock.change = ystockquote.get_change(companyName) 
         #stock.dividend_per_share = ystockquote.get_dividend_per_share(companyName) 
