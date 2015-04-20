@@ -18,7 +18,7 @@ class Stock(models.Model):
       dividend_per_share = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       dividend_yield = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       earnings_per_share = models.DecimalField(max_digits=15, decimal_places=2, default=0)
-      ebitda = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+      ebitda = models.CharField(default="")
       fifty_day_moving_avg = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       fifty_two_week_high = models.DecimalField(max_digits=15, decimal_places=2, default=0)
       fifty_two_week_low = models.DecimalField(max_digits=15, decimal_places=2, default=0)
