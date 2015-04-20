@@ -13,20 +13,28 @@
       <div class="row">
 	    <h4 style="text-align:center;">
         <div class="row">
-        {% if account.stocks %}
+        {% if account.stocks.all %}
           <div class="col-lg-4">
             Stocks
             {% for s in account.stocks.all  %}
-              <a href={{ s.get_absolute_url }} class="list-group-item"> {{s.name}} ( {{ s.ticker }} ) </a>
+              <a href={{ s.get_absolute_url }} class="list-group-item"> {{s.name}} ({{ s.ticker }}) </a>
             {% endfor %}
           </div>
+        {% else %}
+          <div class="col-lg-4">
+            No Stocks Found.
+          </div>
         {% endif %}
-        {% if account.articles %}
+        {% if account.articles.all %}
           <div class="col-md-offset-4">
             Articles
             {% for s in account.articles.all  %}
               <a href={{ s.get_absolute_url }} class="list-group-item"> {{s.title}} by {{ s.author }} </a>
             {% endfor %}
+          </div>
+        {% else %}
+          <div class="col-lg-4">
+            No Articles Found.
           </div>
         {% endif %}
         </div>
