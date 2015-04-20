@@ -3,24 +3,37 @@
 {% if user and not user.is_anonymous %}
 <h1 style="text-align:center;"><small class="subtitle">Welcome to your profile page!</small></h1>
 <h1 style="text-align:center;">Hello, {{ user.first_name }} {{ user.last_name }}</small></h1>
-<div class="subscribe-line">
+<h3 style="text-align:center;">
+<a href="/edit" style="padding-top:0px; margin-top:0px;"><button class="btn btn-round btn-default">Edit Profile</button></a>
+<button class="btn btn-round btn-default">Add Stocks</button></a>
+<button class="btn btn-round btn-default">Add Articles</button></a>
+</h3>
   <div id="subscription" class="container">
     <div class="container">
       <div class="row">
-	    <h1 style="text-align:center;">
-	    <a href="/edit" style="padding-top:0px; margin-top:0px;"><button class="btn btn-round btn-default">Edit Profile</button></a>
+	    <h4 style="text-align:center;">
         <div class="row">
+        {% if account.stocks %}
           <div class="col-lg-4">
-	        <a href="/profile" style="padding-top:0px; margin-top:0px;"><button class="btn btn-round btn-default">Add Stocks</button></a>
+            Stocks
+            {% for s in account.stocks.all  %}
+              <a href={{ s.get_absolute_url }} class="list-group-item"> {{s.name}} ( {{ s.ticker }} ) </a>
+            {% endfor %}
           </div>
-          <div class="col-lg-4">
-	        <a href="/profile" style="padding-top:0px; margin-top:0px;"><button class="btn btn-round btn-default">Add Articles</button></a>
+        {% endif %}
+        {% if account.articles %}
+          <div class="col-md-offset-4">
+            Articles
+            {% for s in account.articles.all  %}
+              <a href={{ s.get_absolute_url }} class="list-group-item"> {{s.title}} by {{ s.author }} </a>
+            {% endfor %}
           </div>
+        {% endif %}
         </div>
+        </h4>
       </div>
     </div>
   </div>
-</div>
 <br>
 {% else %}
 <h1>Nothing here!</h1>
