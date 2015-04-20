@@ -32,13 +32,12 @@ def articles(request):
 
 def view_stock(request, ticker):
     if request.user.__class__.__name__ is 'CustomUser':
-        c_user = get_object_or_404(CustomUser, pk= request.user.pk) 
+        c_user = get_object_or_404(CustomUser, pk= request.user.pk)
         account = Account.objects.get(user=c_user)
     else:
         account = False
     stock = get_object_or_404(Stock, ticker=ticker)
-    
-    return render_to_response("scrapyr_app/stock.html", dict(stock=stock), dict(account=account))
+    return render_to_response("scrapyr_app/stock.html", dict(stock=stock, account=account))
 
 
 def view_article(request, slug):
