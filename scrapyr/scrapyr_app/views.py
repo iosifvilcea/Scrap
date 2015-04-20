@@ -85,12 +85,6 @@ def stockfeed(request):
     return render_to_response('scrapyr_app/stockfeed.html', dict(account=account))
  
 def stock(request):
-    if request.user.__class__.__name__ is 'CustomUser':
-        c_user = get_object_or_404(CustomUser, pk= request.user.pk) 
-        account = Account.objects.get(user=c_user)
-    else:
-        account = False
-
     if request.method == 'POST':
         companyName=request.POST['ticker']
         companyName = companyName.upper()
