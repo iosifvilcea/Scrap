@@ -4,19 +4,14 @@
     <div class="section">
         <div class="container">
           <div class="row">
-            <div class="col-md-6">
-                <div class="clearout"></div>
-            </div>  
-            <div class="col-md-6">
+            <div class="col-lg-12">
                 <div class="product-details">
                   <a href="{{ article.url }}">
                       <h3 class="title">{{ article.title }}</h3>
                   </a> 
                   <p class="description">
-        <a href="{{ stock.summary_quote }}">Description</a></br>
-        Author: {{ article.author }}</br>
-        Publish Date: {{ article.pub_date }}</br>
-        Stocks: {{ article.stocks.all }}
+                    Published {{ article.pub_date }}</br>
+                    by {{ article.author }}</br>
                   </p>
                 </div>   
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -24,16 +19,38 @@
                     <div class="panel-heading" role="tab" id="headingOne">
                       <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Stock Information
+                        Article Description
                         </a>
                       </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                       <div class="panel-body">
-                        {{stock.description}}
+                        {{article.content}}
                       </div>
                     </div>
-                  </div>                    
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Companies Discussed
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                      <div class="panel-body">
+                          {% for s in article.stocks.all %}
+                            <h4>{{ s.name }} ({{s.ticker}})</h4>
+                            Industry: {{s.industry}} <br>
+                            Sector: {{s.sector}} <br>
+                            Last sale: ${{s.last_sale}}<br>
+                            {% if s.description == 0 %}
+                              Description: {{s.description}}
+                            {% endif %}
+                          {% endfor %}
+                          <br>
+                    </div>
+                  </div> 
                 </div>
               </div>
             </div>
