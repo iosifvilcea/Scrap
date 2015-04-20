@@ -23,7 +23,7 @@ def stocks(request):
     else:
         account = False
 
-    stocks = Stock.objects.all()
+    stocks = Stock.objects.order_by('?')
     context = RequestContext(request, {'request': request, 'stocks':stocks,
                                        'account':dict(account=account)})
     return render_to_response('scrapyr_app/stocks.html', context=context)
@@ -35,7 +35,7 @@ def articles(request):
     else:
         account = False
 
-    articles = Article.objects.all()
+    articles = Article.objects.order_by('?')
     context = RequestContext(request, {'request': request, 'articles': articles,
                                        'account':dict(account=account)})
     return render_to_response('scrapyr_app/articles.html', context=context)
