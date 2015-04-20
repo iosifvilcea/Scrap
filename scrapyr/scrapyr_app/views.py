@@ -85,6 +85,12 @@ def stockfeed(request):
     return render_to_response('scrapyr_app/stockfeed.html', dict(account=account))
  
 def stock(request):
+    if request.user.__class__.__name__ is 'CustomUser':
+        c_user = get_object_or_404(CustomUser, pk= request.user.pk)
+        account = Account.objects.get(user=c_user)
+    else:
+        account = False
+
     if request.method == 'POST':
         companyName=request.POST['ticker']
         companyName = companyName.upper()
@@ -111,10 +117,10 @@ def stock(request):
         stock.ebitda = ystockquote.get_ebitda(companyName) 
         stock.fifty_two_week_high = ystockquote.get_52_week_high(companyName) 
         stock.fifty_two_week_low = ystockquote.get_52_week_low(companyName) 
-        #stock.market_cap = ystockquote.get_market_cap(companyName) 
-        #stock.short_ratio = ystockquote.get_short_ratio(companyName) 
-        #stock.stock_exchange = ystockquote.get_stock_exchange(companyName) 
-        #stock.volume = ystockquote.get_volume(companyName)
+        stock.market_cap = ystockquote.get_market_cap(companyName) 
+        stock.short_ratio = ystockquote.get_short_ratio(companyName) 
+        stock.stock_exchange = ystockquote.get_stock_exchange(companyName) 
+        stock.volume = ystockquote.get_volume(companyName)
         stock.price = ystock.get_price()
         #yahoo_finance
         stock.average_daily_volume = ystock.get_avg_daily_volume()
@@ -127,8 +133,7 @@ def stock(request):
         stock.price_earnings_ratio = ystock.get_price_earnings_ratio()
         stock.price_sales_ratio = ystock.get_price_sales()
         stock.save()
-        context = RequestContext(request, {'request': request, 'stock':stock,
-                                           'price': the_price, 'account':dict(account=account) })
+        context = RequestContext(request, dict(account=account, request=request, stock=stock))
     return render_to_response('scrapyr_app/stock.html', context=context)
           
 def index(request):
