@@ -36,14 +36,14 @@ def scraper(article_websites):
 				if re.match("http://w?w?w?\.?" + site + "\.com/20[0-9][0-9]/[0-1][0-9]/[0-3][0-9]/.*", article_link):
 					if article_link not in articles and not article_link.endswith('#comments'):
 						articles.append(article_link)
-						print article_link
+						#print article_link
 			except AttributeError as ae:
 				print str(ae)
 			except TypeError as te:
 				print str(te)
 	return articles
 
-articles = scraper(article_websites)
+#articles = scraper(article_websites)
 '''
 for article in articles:
 	a = newspaper.Article(article)
