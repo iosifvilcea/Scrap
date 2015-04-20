@@ -112,8 +112,8 @@ def stock(request):
         stock.description = stock.description[2:]
         stock.book_value = ystockquote.get_book_value(companyName)  
         stock.change = ystockquote.get_change(companyName) 
-        stock.dividend_per_share = ystockquote.get_dividend_per_share(companyName) 
-        stock.dividend_yield = ystockquote.get_dividend_yield(companyName) 
+        #stock.dividend_per_share = ystockquote.get_dividend_per_share(companyName) 
+        #stock.dividend_yield = ystockquote.get_dividend_yield(companyName) 
         stock.ebitda = ystockquote.get_ebitda(companyName) 
         stock.fifty_two_week_high = ystockquote.get_52_week_high(companyName) 
         stock.fifty_two_week_low = ystockquote.get_52_week_low(companyName) 
