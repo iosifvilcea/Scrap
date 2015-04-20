@@ -26,7 +26,7 @@ def scraper(article_websites):
 	articles = []
 	for site in article_websites:
 		r = requests.get("http://www." + site + ".com")
-		print site
+		# print site
 		data = r.text
 
 		soup = BeautifulSoup(data)
