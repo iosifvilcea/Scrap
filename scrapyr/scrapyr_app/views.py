@@ -6,7 +6,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from scrapyr_app.models import Account, CustomUser, Stock, Article 
+from scrapyr_app.models import Account, CustomUser, Stock, Article, Portfolio 
 from django.shortcuts import redirect
 from django.core.context_processors import csrf
 from yahoo_finance import Share
