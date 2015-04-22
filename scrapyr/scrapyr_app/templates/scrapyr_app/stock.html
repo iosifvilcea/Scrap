@@ -6,18 +6,30 @@
       <div class="row">
         <div class="col-md-6">
           <div class="clearout"></div>
+	  <h3>{{ stock.name }} 30 Day Historical</h3>
+	   <div class="ct-chart ct-perfect-fourth" id="{{stock.name|slugify}}-graph"></div>
+	   <h6>Legend</h6>
+	   <span style="color:#453d3f; border-color:#453d3f;" class="label">Opens</span>
+           <span style="color:#d70206; border-color:#d70206;" class="label">Closes</span>
+	   <span style="color:#f4c63d; border-color:#f4c63d;" class="label">Highs</span>
+	   <span style="color:#d17905; border-color:#d17905;" class="label">Lows</span>
+
+	   <h3>{{ stock.name }} 30 Day Trading Volume</h3>
+	   <div class="ct-chart ct-perfect-fourth" id="{{stock.name|slugify}}-volume-graph"></div>
+	   <h6>Legend</h6>
+	   <span style="color:#d70206; border-color:#d70206;" class="label">Volume</span>
         </div>  
         <div class="col-md-6">
           <div class="product-details">
             <a href="{{ stock.get_absolute_url }}">
-              <h3 class="title">{{ stock.title }}</h3>
+              <h3 class="title">{{ stock.name }}</h3>
             </a> 
             <p class="description">
               <a href="{{ stock.summary_quote }}">Description</a></br>
               Sector: {{ stock.sector }}</br>
               Industry: {{ stock.industry }}</br>
               Tagname: {{ stock.ticker }}
-            </p>                  
+            </p>          
             <span>Current Index {{ stock.price }}</span>
           </div>   
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -93,4 +105,75 @@
     </div>
   </div>
 </div>
+<script>
+new Chartist.Line('#{{ stock.name|slugify }}-graph', {
+    labels: [{% for i in days_l %} {% if forloop.last %}'{{ i }}'
+    {% else %}'{{ i }}',
+    {% endif %}
+    {% endfor %}],
+    series: [ {
+        name: 'Opens',
+        data: {{ opens }}
+    },
+    {
+        name: 'Closes',
+        data: {{ closes }}
+     },
+    {                                                                                                  
+        name: 'Highs',                                                                                
+        data: {{ highs }}                                                                             
+     },                                                                                                
+     {                                                                                                 
+        name: 'Lows',                                                                                 
+        data: {{ lows }}                                                                              
+    },
+    {
+        name: 'Adjusted Close',
+        data: {{ averages }}
+    }
+    ] },
+    {
+    lineSmooth:false,
+    axisX: {
+        labelInterpolationFnc: function(value) {
+            return value;
+        }
+    },
+    axisY: {
+        labelInterpolationFnc: function(value) {
+            return value;
+        },
+        offset: 40
+    },
+    showArea: false,
+    chartPadding:15
+});
+
+new Chartist.Line('#{{ stock.name|slugify }}-volume-graph', {
+    labels: [{% for i in days_l %} {% if forloop.last %}'{{ i }}'
+    {% else %}'{{ i }}',
+    {% endif %}
+    {% endfor %}],
+    series: [ {
+        name: 'Volume',
+        data: {{ volume }}
+    }    
+    ] },
+    {
+    lineSmooth:false,
+    axisX: {
+        labelInterpolationFnc: function(value) {
+            return value;
+        }
+    },
+    axisY: {
+        labelInterpolationFnc: function(value) {
+            return value;
+        },
+        offset: 40
+    },
+    showArea: false,
+    chartPadding:15
+});
+</script>
 {% endblock %}

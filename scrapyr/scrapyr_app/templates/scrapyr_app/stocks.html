@@ -14,8 +14,34 @@
     <div class="content">
       <div class="author">
 	<a href="{{ stock.get_absolute_url }}">
-	  <img class="avatar border-gray" src="http://content.nasdaq.com/logos/{{ stock.ticker }}.gif" alt="{{ stock.ticker }}" />
-	  <h4 class="title">{{ stock.name }} ::: {{ stock.ticker}} <br />
+	  <div class="avatar border-gray" style="margin-left:50px;" >
+            {% if stock.sector == "Finance" %}
+            <i class="fa fa-money" style="font-size:6em; margin-left:-55px; margin-top:20px; color:#27AE60; text-align:center;"></i>
+            {% elif  stock.sector == "Health Care" %}
+            <i class="fa fa-medkit" style="font-size:6em; margin-left:-55px; margin-top:20px; color:#C0392B; text-align:center;"></i>
+            {% elif  stock.sector == "Energy" %}
+            <i class="fa fa-bolt" style="font-size:6em; margin-left:-25px; margin-top:20px; color:#F1C40F; text-align:center;"></i>
+            {% elif  stock.sector == "Consumer Services" %}
+            <i class="fa fa-cutlery" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#7F8C8D; text-align:center;"></i>
+            {% elif  stock.sector == "Consumer Non-Durables" %}
+            <i class="fa fa-shopping-cart" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#BDC3C7; text-align:center;"></i>
+            {% elif  stock.sector == "Capital Goods" %}
+            <i class="fa fa-building" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#2980B9; text-align:center;"></i>
+            {% elif  stock.sector == "Public Utilities" %}
+            <i class="fa fa-tint" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#3498DB; text-align:center;"></i>
+            {% elif  stock.sector == "Technology" %}
+            <i class="fa fa-laptop" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#D35400; text-align:center;"></i>
+            {% elif  stock.sector == "Miscellaneous" %}
+            <i class="fa fa-cogs" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#95A5A6; text-align:center;"></i>
+            {% elif  stock.sector == "Consumer Durables" %}
+            <i class="fa fa-plug" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#000000; text-align:center;"></i>
+            {% elif  stock.sector == "Transportation" %}
+            <i class="fa fa-bus" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#2C3E50; text-align:center;"></i>
+            {% else %}
+            <i class="fa fa-question-circle" style="font-size:6em; margin-left:-50px; margin-top:20px; color:#2C3E50; text-align:center;"></i>
+            {% endif %}
+          </div>
+	  <h4 class="title">{{ stock.name }} <br/> {{ stock.ticker}} <br />
 	    <small>{{stock.sector}}</small>
           </h4> 
 	</a>
@@ -24,21 +50,48 @@
 	"{{ stock.industry }}"
       </p>
     </div>
-                             <div class="text-center">
-                                <p>
-
-                                        <button id ="addfave" data-catid="{{article.id}}" class="btn btn-mini btn-primary" type="button">Add Fave</button>
-
-                                </p>
-    
-                            </div>
-                        </div> <!-- end card -->
+    <div class="text-center">
+      <p>
+	 <div class="form-group">
+                <form method="POST" action="/add/">
+                  {% csrf_token %}
+                  <input name="ticker" id="stock_tag" style="visible:false; border-color:transparent; background:transparent; color:#fff;" value="{{ stock.ticker }}" type="text">
+                  <input type="submit" value="Add to Favorites"/>
+                </form>
+              </div>
+      </p>
+      
+    </div>
+  </div> <!-- end card -->
 </div>
 {% if  forloop.counter|divisibleby:"4" %}
 </div>
 {% endif %}
 {% endfor %}
 </div>
+<div class="row">
+<div class="col-md-5"></div>
+<div class="col-md-4">
+  {% if stocks.object_list and stocks.paginator.num_pages > 1 %}
+<ul class="pagination">
+  {% if stocks.has_previous %}
+  <li>
+    <a href="?page={{ stocks.previous_page_number }}">{{ stocks.previous_page_number }}</a>
+  </li>
+  {% endif %}
+   <li>
+    <a href="#">{{ stocks.number }}</a>
+  </li>
+  {% if stocks.has_next %}
+  <li>
+    <a href="?page={{ stocks.next_page_number }}">{{ stocks.next_page_number }}</a>
+  </li>
+  {% endif %}
+
+</div>
+{% endif %}
+</div>
+
 </div>
 </div>
 {% endblock %}
